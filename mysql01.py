@@ -7,7 +7,14 @@ if conn.is_connected():
 
 cursor=conn.cursor()
 cursor.execute('select * from emp')
-cursor.execute('insert into emp values(3,'joe',30000)')
+
+try:
+    cursor.execute('insert into emp values(3,'joe',30000)')
+    cursor.commit()
+    print("employee added")
+except:
+    conn.rollback()
+
 #row=cursor.fetchone() #fetch one with while or fetch all with for
 row=cursor.fetchall()
 print("total no of records ", cursor.rowcount)
